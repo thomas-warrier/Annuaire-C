@@ -6,11 +6,56 @@
 #include "gestion_client.h"
 #define NOM_FICHIER "annuaire5000.csv"
 
-int charger_fichier()
+void menu_principal(int nombre_client, client clients[])
 {
+    int choix;
+    
+    do
+    {
+        printf("==========================[ menu principal ]==========================\n1)ajouter un client\n2)afficher tout les clients\n3)ajouter un client dans l'annuaire\n4)supprimer un client de l'annuaire\n6)quitter\n");
+        scanf("%d", &choix);
+        switch (choix)
+        {
+        case 1:
+            ajouter_client(&clients, nombre_client);
+            nombre_client++; //on incrémente nombre client comme on rajoute un client.            
+            break;
+        case 2: 
+            print_tableau(clients, nombre_client);
+            break;
+        case 3:
+
+        case 4:
+
+        case 5:
+
+        case 6:
+
+        case 7:
+
+        case 8:
+
+        case 9:
+
+        case 10:
+
+        default:
+            break;
+        }
+    }while(choix!=6);
+}
+
+int main()
+{
+    /**
+     * @brief on lit simplement le fichier,
+     * pour mettre les infos dans le struct,on écrira le fichier a la fin
+     * quand on sauvegardera dans le fichier
+     * 
+     */
     FILE *fp = fopen(NOM_FICHIER, "r");
     int nombre_client = nombre_ligne(fp);
-    client *clients = malloc(nombre_client * sizeof(client));
+    client *clients = malloc((nombre_client) * sizeof(client));
 
     if (fp)
     {
@@ -66,50 +111,7 @@ int charger_fichier()
         }
         fclose(fp);
     }
+    menu_principal(nombre_client, clients);
+    free(clients);
     return 0;
-}
-
-void menu_principal()
-    {
-        int choix;
-        printf("==========================[ menu principal ]======================\n1)charger fichier\n2)afficher tout les clients\n3)ajouter un client dans l'annuaire\n4)supprimer un client de l'annuaire");
-        scanf("%d", &choix);
-        switch (choix)
-        {
-        case 1: ;
-            char* nom_fichier;
-            printf("rentrer le nom de votre fichier");
-            scanf("%s", *nom_fichier);
-            charger_fichier(nom_fichier);
-
-            break;
-        case 2:
-
-        case 3:
-
-        case 4:
-
-        case 5:
-
-        case 6:
-
-        case 7:
-
-        case 8:
-
-        case 9:
-
-        case 10:
-
-        default:
-            break;
-        }
-    }
-
-
-int main()
-{
-menu_principal();
-return 0;
-    
 }

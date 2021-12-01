@@ -16,7 +16,7 @@ int nombre_ligne(FILE *fp)
 
 
 
-void print_tableau(client *clients, int nombre_client)
+void print_tableau(client clients[], int nombre_client)
 {
     int y = 0;
     while (y < nombre_client)
@@ -28,7 +28,7 @@ void print_tableau(client *clients, int nombre_client)
         printf("%s, ", clients[y].code_postal);
         printf("%s, ", clients[y].num_de_tel);
         printf("%s, ", clients[y].adresse_mail);
-        printf("%s\n", clients[y].profession);
+        printf("%s\n\n", clients[y].profession);
         y++;
     }
 }

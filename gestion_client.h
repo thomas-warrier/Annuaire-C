@@ -17,12 +17,16 @@ typedef struct
 	char profession[64];
 } client;
 
-void agrandir_tableau(client * *clients, int taille_augmenter, int nombre_client);
+void agrandir_tableau(client* clients[], int taille_augmenter, int nombre_client);
 
-void ajouter_client(client* clients,int taille_augmenter, int nombre_client);
+void ajouter_client(client* clients[],int nombre_client);
 
 int demande_client();
 
-int modif_client(int choix_information, int choix_client, client *clients);
+int choix_client();
 
-int supprimer_client(client * clients);
+int modif_client(int choix_information, int choix_client, client clients[]);
+
+int supprimer_client(client clients[],int nombre_client);
+
+int decaler_tableau(client clients[], int position, int nombre_client);

@@ -10,6 +10,6 @@
 
 int nombre_ligne(FILE* fp);
 
-void print_tableau(client* clients, int nombre_client);
+void print_tableau(client clients[], int nombre_client);
 
 char* strsep(char** stringp, const char* delim);
