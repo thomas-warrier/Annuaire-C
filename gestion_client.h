@@ -17,7 +17,7 @@ typedef struct
 	char profession[64];
 } client;
 
-void agrandir_tableau(client* clients[], int taille_augmenter, int nombre_client);
+void modifier_tableau(client* clients[], int taille_augmenter, int nombre_client);
 
 void ajouter_client(client* clients[],int nombre_client);
 

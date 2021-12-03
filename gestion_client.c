@@ -1,16 +1,23 @@
 #include "gestion_client.h"
+#include "gestion_fichier.h"
 
-void agrandir_tableau(client* clients[], int taille_augmenter, int nombre_client)
+void modifier_tableau(client* clients[], int taille_augmenter, int nombre_client)
 {
+    
     client *temporaire = *clients;
     *clients = malloc((nombre_client + taille_augmenter) * sizeof(client));
+    if (taille_augmenter>=0){
     memcpy(*clients, temporaire, nombre_client * sizeof(client));
+    }
+    else {
+        memcpy(*clients, temporaire, (nombre_client + taille_augmenter) * sizeof(client));
+    }
     free(temporaire);
 }
 
 void ajouter_client(client* clients[], int nombre_client)
 {
-    agrandir_tableau(clients, 1, nombre_client); //on agrandit le tableau afin d'ajouter un nouveau client.
+    modifier_tableau(clients, 1, nombre_client); //on agrandit le tableau afin d'ajouter un nouveau client.
 
     printf("saisisser le prénom du client que vous souhaitez ajouter :  ");
     scanf("%64s", (*clients)[nombre_client].prenom);
@@ -94,7 +101,7 @@ int supprimer_client(client clients[], int nombre_client)
 
 int decaler_tableau(client clients[], int position, int nombre_client)
 {
-    for (int i = position; i < nombre_client-1; i++)
+    for (int i = position; i < nombre_client; i++)
     {
         strcpy(clients[i].prenom, clients[i + 1].prenom);
 
@@ -110,4 +117,7 @@ int decaler_tableau(client clients[], int position, int nombre_client)
         
         strcpy(clients[i].profession, clients[i + 1].profession);
     }
+    modifier_tableau(&clients, -1, nombre_clients_struct(clients));
+
+    
 }

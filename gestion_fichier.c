@@ -1,7 +1,12 @@
 #include "gestion_fichier.h"
 
-
-int nombre_ligne(FILE *fp)
+/**
+ * @brief prend en compte le nombre de ligne du fichier,mais pas celui du tableau struct.
+ * 
+ * @param fp 
+ * @return int 
+ */
+int nombre_ligne_fichier(FILE *fp)
 {
     int nb_ligne = 0;
     fseek(fp, 0, SEEK_SET);
@@ -11,6 +16,19 @@ int nombre_ligne(FILE *fp)
         nb_ligne++;
     }
     return nb_ligne;
+}
+/**
+ * @brief compte le nombre d'octets avec la fonction sizeof () du premier 
+ * élément de tableau strs [0] (dans ce cas, 20 octets) diviser la taille entière avec la 
+ * taille d'un élément ce qui vous donnera le nombre d'éléments.
+ * 
+ * @param clients 
+ * @return int 
+ */
+int nombre_clients_struct(client clients[])
+{
+    int nombre_ligne = (sizeof((client)* clients))/sizeof(client); //on divise la taille du tableau de tableau par la taille d'un élément afin d'avoir le nombre de clients.
+    return nombre_ligne;
 }
 
 
