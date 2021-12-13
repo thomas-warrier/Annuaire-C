@@ -3,7 +3,7 @@
 int chercher_par()
 {
     int choix_information;
-    printf("================[par quelle information souhaitez vous trier ?]=======================\n1)prenom\n2)nom\n3)code postal\n4)profession\n");
+    printf("================[quelle information souhaitez vous rechercher ?]=======================\n1)prenom\n2)nom\n3)code postal\n4)profession\n");
     scanf("%d", &choix_information);
     return choix_information;
 }
@@ -23,26 +23,42 @@ char* par_quoi_chercher(client *clients,int choix_information)
     }
 }
 
-
-void recherche_par_interpolation(client* clients[], int taille, char* recherche,int choix_information)
+int strcmp_minuscule (const char *p1, const char *p2)   //j'ai repris le code source de la fonction strcmp et je l'ai modifié en ajoutant en faisant en sorte qu'au moment de la comparaison il compare les caractére en minuscule.
 {
-    int gauche = 0;
-    int droite = taille - 1;
-    int mid;
-
-    while((par_quoi_chercher(&clients[droite],choix_information)) != clients[gauche]) && (recherche >= clients[gauche]) && (recherche <= clients[droite])){
-        mid = gauche + ((recherche - clients[gauche]) * (droite - gauche) / (clients[droite] - clients[gauche]));
-
-        if (clients[mid] < recherche)
-            gauche = mid + 1;
-        else if (recherche < clients[mid])
-            droite = mid - 1;
-        else
-            printf("%s,%s,%s,%s,%s,%s,%s"),clients[mid]->prenom,clients[mid]->nom,clients[mid]->ville,clients[mid]->code_postal,clients[mid]->num_de_tel,clients[mid]->adresse_mail,clients[mid]->profession;
+  const unsigned char *s1 = (const unsigned char *) p1;
+  const unsigned char *s2 = (const unsigned char *) p2;
+  unsigned char c1, c2;
+  do
+    {
+      c1 = tolower((unsigned char) *s1++);
+      c2 = tolower((unsigned char) *s2++);
+      if (c1 == '\0')
+        return c1 - c2;
     }
+  while (c1 == c2);
+  return c1 - c2;
+}
 
-    if (recherche == clients[gauche])
-        return gauche ;
-    else
-        return -1;
+void recherche_sequentielle(client clients[], char* recherche,int choix_information,int nombre_client)
+{
+    int i=0;
+    while (i< nombre_client){
+        if (strcmp_minuscule((par_quoi_chercher(&clients[i],choix_information)),recherche) == 0 ){
+            printf("\n%s,%s,%s,%s,%s,%s,%s",clients[i].prenom,clients[i].nom,clients[i].ville,clients[i].code_postal,clients[i].num_de_tel,clients[i].adresse_mail,clients[i].profession);
+        }
+        i++;        
+    }
+}
+
+void filtre(client clients[],char* mot_filtre,int choix_information,int nombre_client)
+{
+    int i=0;
+    char* p;
+    while (i< nombre_client){
+        p=strstr((par_quoi_chercher(&clients[i],choix_information)),mot_filtre);
+        if (p){
+            printf("\n%s",p);
+        }
+        i++;        
+    }
 }
