@@ -12,7 +12,7 @@ void menu_principal(int nombre_client, client clients[])
     
     do
     {
-        printf("==========================[ menu principal ]==========================\n1)ajouter un client\n2)afficher tout les clients\n3)supprimer un client de l'annuaire\n4)supprimer un client de l'annuaire\n6)quitter\n");
+        printf("==========================[ menu principal ]==========================\n1)ajouter un client\n2)afficher tout les clients\n3)supprimer un client de l'annuaire\n4)modifier les informations d'un client de l'annuaire\n5)trier le tableau\n6)quitter\n");
         scanf("%d", &choix);
         switch (choix)
         {
@@ -25,20 +25,18 @@ void menu_principal(int nombre_client, client clients[])
             break;
         case 3:;
             supprimer_client(clients,nombre_client);
+            modifier_tableau(&clients, -1, nombre_client);
+            nombre_client--;
+            break;
             
         case 4:
+            modif_client(choix_client(),clients);
+            break;
 
         case 5:
-
-        case 6:
-
-        case 7:
-
-        case 8:
-
-        case 9:
-
-        case 10:
+            // triRapid(clients,0,nombre_client-1,trier_sur());
+            tri_rapide(clients, 0, nombre_client-1, trier_sur());
+            break;
 
         default:
             break;
@@ -56,7 +54,8 @@ int main()
      */
     FILE *fp = fopen(NOM_FICHIER, "r");
     int nombre_client = nombre_ligne_fichier(fp);
-    client *clients = malloc((nombre_client) * sizeof(client));
+
+    client clients[3];
 
     if (fp)
     {
@@ -113,6 +112,6 @@ int main()
         fclose(fp);
     }
     menu_principal(nombre_client, clients);
-    free(clients);
+    // free(clients);
     return 0;
 }

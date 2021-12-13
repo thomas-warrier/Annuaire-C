@@ -25,11 +25,12 @@ int nombre_ligne_fichier(FILE *fp)
  * @param clients 
  * @return int 
  */
-int nombre_clients_struct(client clients[])
-{
-    int nombre_ligne = (sizeof((client)* clients))/sizeof(client); //on divise la taille du tableau de tableau par la taille d'un élément afin d'avoir le nombre de clients.
-    return nombre_ligne;
-}
+
+//int nombre_clients_struct(client clients[])
+//{
+//    int nombre_ligne = (sizeof((client)* clients))/sizeof(client); //on divise la taille du tableau de tableau par la taille d'un élément afin d'avoir le nombre de clients.
+//    return nombre_ligne;
+//}
 
 
 
@@ -53,7 +54,7 @@ void print_tableau(client clients[], int nombre_client)
 
 
 
-char *strsep(char **stringp, const char *delim)
+char *strsep(char **stringp, const char *delim) //pris sur https://code.woboq.org/userspace/glibc/string/strsep.c.html
 {
     char *begin, *end;
     begin = *stringp;

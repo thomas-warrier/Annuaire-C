@@ -21,11 +21,11 @@ void modifier_tableau(client* clients[], int taille_augmenter, int nombre_client
 
 void ajouter_client(client* clients[],int nombre_client);
 
-int demande_client();
+int demande_client_modif();
 
 int choix_client();
 
-int modif_client(int choix_information, int choix_client, client clients[]);
+int modif_client(int choix_client, client clients[]);
 
 int supprimer_client(client clients[],int nombre_client);
 
