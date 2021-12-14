@@ -60,6 +60,7 @@ void menu_principal(int nombre_client, client clients[])
 
 int main()
 {
+    
     /**
      * @brief on lit simplement le fichier,
      * pour mettre les infos dans le struct,on écrira le fichier a la fin
@@ -69,19 +70,17 @@ int main()
     FILE *fp = fopen(NOM_FICHIER, "r");
     int nombre_client = nombre_ligne_fichier(fp);
 
-    client clients[3];
-
+    client* clients;
+    clients=malloc(nombre_client* sizeof(client));
     if (fp)
     {
         char ligne[MAX_LENGHT];
         char *token;
         char *separateur = ",";
         int index = 0;
-
         fseek(fp, 0, SEEK_SET);
         while (fgets(ligne, MAX_LENGHT, fp) != NULL)
         {
-
             char *copie_ligne = strdup(ligne); //dupliquer la chaîne ligne avec strdupa car le strsep modifie
                                                //le pointeur passé, et nous ne voulons pas perdre la valeur d’origine
 
@@ -100,8 +99,8 @@ int main()
             {
                 strcpy(clients[index].ville, token);
             }
-            token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL)
+            token = strsep(&copie_ligne, "," );
+            if (*token != '\n' && token != NULL  && *token != '\0')
             {
                 strcpy(clients[index].code_postal, token);
             }
@@ -111,11 +110,11 @@ int main()
                 strcpy(clients[index].num_de_tel, token);
             }
             token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL)
+            if (*token != '\n' && token != NULL && *token != '\0')
             {
                 strcpy(clients[index].adresse_mail, token);
             }
-            token = strsep(&copie_ligne, ",");
+            token = strsep(&copie_ligne, "\n");
             if (*token != '\n' && token != NULL)
             {
                 strcpy(clients[index].profession, token);
@@ -125,6 +124,10 @@ int main()
         }
         fclose(fp);
     }
-    menu_principal(nombre_client, clients);
+    else
+    {
+        printf("erreur d'ouverture\n");
+    }
+    menu_principal(nombre_client,clients);
     return 0;
 }

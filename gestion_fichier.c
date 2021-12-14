@@ -40,14 +40,15 @@ void print_tableau(client clients[], int nombre_client)
     int y = 0;
     while (y < nombre_client)
     {
-        printf("ligne %d :", y);
-        printf("%s, ", clients[y].prenom);
-        printf("%s, ", clients[y].nom);
-        printf("%s, ", clients[y].ville);
-        printf("%s, ", clients[y].code_postal);
-        printf("%s, ", clients[y].num_de_tel);
-        printf("%s, ", clients[y].adresse_mail);
-        printf("%s\n\n", clients[y].profession);
+        printf("\nligne %d :", y);
+        printf("%s,", clients[y].prenom);
+        printf("%s,", clients[y].nom);
+        printf("%s,", clients[y].ville);
+        printf("%s,", clients[y].code_postal);
+        printf("%s,", clients[y].num_de_tel);
+        printf("%s,", clients[y].adresse_mail);
+        printf("%s\n", clients[y].profession);
+        
         y++;
     }
 }
