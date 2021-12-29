@@ -2,9 +2,9 @@
 
 /**
  * @brief prend en compte le nombre de ligne du fichier,mais pas celui du tableau struct.
- * 
- * @param fp 
- * @return int 
+ *
+ * @param fp
+ * @return int
  */
 int nombre_ligne_fichier(FILE *fp)
 {
@@ -18,12 +18,12 @@ int nombre_ligne_fichier(FILE *fp)
     return nb_ligne;
 }
 /**
- * @brief compte le nombre d'octets avec la fonction sizeof () du premier 
- * élément de tableau strs [0] (dans ce cas, 20 octets) diviser la taille entière avec la 
+ * @brief compte le nombre d'octets avec la fonction sizeof () du premier
+ * élément de tableau strs [0] (dans ce cas, 20 octets) diviser la taille entière avec la
  * taille d'un élément ce qui vous donnera le nombre d'éléments.
- * 
- * @param clients 
- * @return int 
+ *
+ * @param clients
+ * @return int
  */
 
 //int nombre_clients_struct(client clients[])
@@ -35,11 +35,12 @@ int nombre_ligne_fichier(FILE *fp)
 
 
 
-void print_tableau(client clients[], int nombre_client)
+void print_tableau(client clients[], int* nombre_client)
 {
     int y = 0;
     while (y < nombre_client)
     {
+        printf("hii!");
         printf("\nligne %d :", y);
         printf("%s,", clients[y].prenom);
         printf("%s,", clients[y].nom);
@@ -48,7 +49,7 @@ void print_tableau(client clients[], int nombre_client)
         printf("%s,", clients[y].num_de_tel);
         printf("%s,", clients[y].adresse_mail);
         printf("%s\n", clients[y].profession);
-        
+
         y++;
     }
 }

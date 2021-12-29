@@ -11,7 +11,7 @@
 void menu_principal(int nombre_client, client clients[])
 {
     int choix;
-    
+
     do
     {
         printf("\n==========================[ menu principal ]==========================\n1)ajouter un client\n2)afficher tout les clients\n3)supprimer un client de l'annuaire\n4)modifier les informations d'un client de l'annuaire\n5)trier le tableau\n6)rechercher un client par une information\n7)filtre\n8)quitter\n");
@@ -20,9 +20,9 @@ void menu_principal(int nombre_client, client clients[])
         {
         case 1:
             ajouter_client(&clients, nombre_client);
-            nombre_client++; //on incrémente nombre client comme on rajoute un client.            
+            nombre_client++; //on incrémente nombre client comme on rajoute un client.
             break;
-        case 2: 
+        case 2:
             print_tableau(clients,nombre_client);
             break;
         case 3:;
@@ -30,7 +30,7 @@ void menu_principal(int nombre_client, client clients[])
             modifier_tableau(&clients, -1, nombre_client);
             nombre_client--;
             break;
-            
+
         case 4:
             modif_client(choix_client(),clients);
             break;
@@ -60,20 +60,26 @@ void menu_principal(int nombre_client, client clients[])
 
 int main()
 {
-    
+
     /**
      * @brief on lit simplement le fichier,
      * pour mettre les infos dans le struct,on écrira le fichier a la fin
      * quand on sauvegardera dans le fichier
-     * 
+     *
      */
-    FILE *fp = fopen(NOM_FICHIER, "r");
+    FILE *fp = fopen(NOM_FICHIER, "w+");
     int nombre_client = nombre_ligne_fichier(fp);
 
     client* clients;
     clients=malloc(nombre_client* sizeof(client));
-    if (fp)
+
+    if (fp==NULL)
     {
+         printf("erreur d'ouverture\n");
+    }
+    else
+    {
+        printf("hello");
         char ligne[MAX_LENGHT];
         char *token;
         char *separateur = ",";
@@ -123,10 +129,6 @@ int main()
             index++;
         }
         fclose(fp);
-    }
-    else
-    {
-        printf("erreur d'ouverture\n");
     }
     menu_principal(nombre_client,clients);
     return 0;
