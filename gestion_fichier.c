@@ -33,14 +33,12 @@ int nombre_ligne_fichier(FILE *fp)
 //}
 
 
-
-
-void print_tableau(client clients[], int* nombre_client)
+void print_tableau(client clients[], int* ptrnombre)
 {
     int y = 0;
-    while (y < nombre_client)
+    printf("hey!");
+    while (y < *ptrnombre)
     {
-        printf("hii!");
         printf("\nligne %d :", y);
         printf("%s,", clients[y].prenom);
         printf("%s,", clients[y].nom);

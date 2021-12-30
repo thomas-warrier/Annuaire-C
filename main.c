@@ -6,9 +6,88 @@
 #include "gestion_client.h"
 #include "recherche.h"
 
-#define NOM_FICHIER "annuaire5000.csv"
+#define NOM_FICHIER "../annuaire5000.csv"
 
-void menu_principal(int nombre_client, client clients[])
+void menu_principal(int nombre_client, client clients[], int *ptrnombre);
+
+
+/**
+     * @brief on lit simplement le fichier,
+     * pour mettre les infos dans le struct,on écrira le fichier a la fin
+     * quand on sauvegardera dans le fichier
+     *
+     */
+int main()
+{
+    FILE *fp = fopen( NOM_FICHIER, "r+");
+
+    int nombre_client = nombre_ligne_fichier(fp);
+    int *ptrnombre = &nombre_client;
+    client *clients;
+    clients=malloc(nombre_client* sizeof(client));
+
+        if (fp==NULL)
+        {
+             printf("erreur d'ouverture\n");
+        }
+        else
+        {
+            char ligne[MAX_LENGHT];
+            char *token;
+            //char *separateur = ",";
+            int index = 0;
+            fseek(fp, 0, SEEK_SET);
+            while (fgets(ligne, MAX_LENGHT, fp) != NULL)
+            {
+                char *copie_ligne = strdup(ligne); //dupliquer la chaîne ligne avec strdup car le strsep modifie
+                                                   //le pointeur passé, et nous ne voulons pas perdre la valeur d’origine
+
+                token = strsep(&copie_ligne, ",");
+                if (*token != '\n' && token != NULL)
+                {
+                    strcpy(clients[index].prenom, token);
+                }
+                token = strsep(&copie_ligne, ",");
+                if (*token != '\n' && token != NULL)
+                {
+                    strcpy(clients[index].nom, token);
+                }
+                token = strsep(&copie_ligne, ",");
+                if (*token != '\n' && token != NULL)
+                {
+                    strcpy(clients[index].ville, token);
+                }
+                token = strsep(&copie_ligne, "," );
+                if (*token != '\n' && token != NULL  && *token != '\0')
+                {
+                    strcpy(clients[index].code_postal, token);
+                }
+                token = strsep(&copie_ligne, ",");
+                if (*token != '\n' && token != NULL)
+                {
+                    strcpy(clients[index].num_de_tel, token);
+                }
+                token = strsep(&copie_ligne, ",");
+                if (*token != '\n' && token != NULL && *token != '\0')
+                {
+                    strcpy(clients[index].adresse_mail, token);
+                }
+                token = strsep(&copie_ligne, "\n");
+                if (*token != '\n' && token != NULL)
+                {
+                    strcpy(clients[index].profession, token);
+                }
+
+                index++;
+            }
+            fclose(fp);
+        }
+        menu_principal( nombre_client,clients, ptrnombre);
+
+    return 0;
+}
+
+void menu_principal(int nombre_client, client clients[], int *ptrnombre)
 {
     int choix;
 
@@ -23,7 +102,7 @@ void menu_principal(int nombre_client, client clients[])
             nombre_client++; //on incrémente nombre client comme on rajoute un client.
             break;
         case 2:
-            print_tableau(clients,nombre_client);
+            print_tableau(clients, ptrnombre);
             break;
         case 3:;
             supprimer_client(clients,nombre_client);
@@ -56,80 +135,4 @@ void menu_principal(int nombre_client, client clients[])
             break;
         }
     }while(choix!=8);
-}
-
-int main()
-{
-
-    /**
-     * @brief on lit simplement le fichier,
-     * pour mettre les infos dans le struct,on écrira le fichier a la fin
-     * quand on sauvegardera dans le fichier
-     *
-     */
-    FILE *fp = fopen(NOM_FICHIER, "w+");
-    int nombre_client = nombre_ligne_fichier(fp);
-
-    client* clients;
-    clients=malloc(nombre_client* sizeof(client));
-
-    if (fp==NULL)
-    {
-         printf("erreur d'ouverture\n");
-    }
-    else
-    {
-        printf("hello");
-        char ligne[MAX_LENGHT];
-        char *token;
-        char *separateur = ",";
-        int index = 0;
-        fseek(fp, 0, SEEK_SET);
-        while (fgets(ligne, MAX_LENGHT, fp) != NULL)
-        {
-            char *copie_ligne = strdup(ligne); //dupliquer la chaîne ligne avec strdupa car le strsep modifie
-                                               //le pointeur passé, et nous ne voulons pas perdre la valeur d’origine
-
-            token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL)
-            {
-                strcpy(clients[index].prenom, token);
-            }
-            token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL)
-            {
-                strcpy(clients[index].nom, token);
-            }
-            token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL)
-            {
-                strcpy(clients[index].ville, token);
-            }
-            token = strsep(&copie_ligne, "," );
-            if (*token != '\n' && token != NULL  && *token != '\0')
-            {
-                strcpy(clients[index].code_postal, token);
-            }
-            token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL)
-            {
-                strcpy(clients[index].num_de_tel, token);
-            }
-            token = strsep(&copie_ligne, ",");
-            if (*token != '\n' && token != NULL && *token != '\0')
-            {
-                strcpy(clients[index].adresse_mail, token);
-            }
-            token = strsep(&copie_ligne, "\n");
-            if (*token != '\n' && token != NULL)
-            {
-                strcpy(clients[index].profession, token);
-            }
-
-            index++;
-        }
-        fclose(fp);
-    }
-    menu_principal(nombre_client,clients);
-    return 0;
 }
