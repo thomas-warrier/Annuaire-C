@@ -16,3 +16,5 @@ int nombre_ligne_fichier(FILE* fp);
 void print_tableau(client clients[], int nombre_client);
 
 char* strsep(char** stringp, const char* delim);
+
+void sauvegarde(client clients[],char* Nom_fichier,int nombre_client);

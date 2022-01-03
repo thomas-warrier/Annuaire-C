@@ -4,8 +4,13 @@
 #include "gestion_fichier.h"
 #include "tri.h"
 
-int chercher_par();
-char* par_quoi_chercher(client *clients,int choix_information);
+int chercher_par_filtre();
+
+int chercher_par_recherche();
+
+char* par_quoi_chercher_recherche(client *clients, int choix_information);
+
+char* par_quoi_chercher_filtre(client *clients,int choix_information);
 
 void recherche_sequentielle(client clients[], char* recherche,int choix_information,int nombre_client);
 

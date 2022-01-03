@@ -1,4 +1,5 @@
 #include "gestion_fichier.h"
+#define NOM_FICHIER "annuaire5000.csv"
 
 /**
  * @brief prend en compte le nombre de ligne du fichier,mais pas celui du tableau struct.
@@ -32,29 +33,35 @@ int nombre_ligne_fichier(FILE *fp)
 //    return nombre_ligne;
 //}
 
-
-
-
 void print_tableau(client clients[], int nombre_client)
 {
     int y = 0;
+
     while (y < nombre_client)
     {
-        printf("\nligne %d :", y);
-        printf("%s,", clients[y].ID);
-        printf("%s,", clients[y].prenom);
-        printf("%s,", clients[y].nom);
-        printf("%s,", clients[y].ville);
-        printf("%s,", clients[y].code_postal);
-        printf("%s,", clients[y].num_de_tel);
-        printf("%s,", clients[y].adresse_mail);
-        printf("%s\n", clients[y].profession);
-        
+        printf("\n Ligne %d : %s,%s,%s,%s,%s,%s,%s", 
+        y,clients[y].prenom,
+        clients[y].nom,
+        clients[y].ville,
+        clients[y].code_postal,
+        clients[y].num_de_tel,
+        clients[y].adresse_mail,
+        clients[y].profession);
+        // printf("%s,", clients[y].prenom);
+        // printf("%s,", clients[y].nom);
+        // printf("%s,", clients[y].ville);
+        // printf("%s,", clients[y].code_postal);
+        // printf("%s,", clients[y].num_de_tel);
+        // printf("%s,", clients[y].adresse_mail);
+        // printf("%s\n", clients[y].profession);
+        // fprintf(fp,"\n%s,%s,%s,%s,%s,%s",
+        //     clients[y].nom,
+        //     clients[y].prenom,
+        //     clients[y].profession);
+
         y++;
     }
 }
-
-
 
 char *strsep(char **stringp, const char *delim) //pris sur https://code.woboq.org/userspace/glibc/string/strsep.c.html
 {
@@ -74,4 +81,40 @@ char *strsep(char **stringp, const char *delim) //pris sur https://code.woboq.or
         /* No more delimiters; this is the last token.  */
         *stringp = NULL;
     return begin;
+}
+
+void sauvegarde(client clients[],char* Nom_fichier,int nombre_client)
+{
+    FILE *fp = fopen(Nom_fichier, "w");
+
+    if (fp)
+    {
+        fprintf(fp,"%s,%s,%s,%s,%s,%s,%s",
+            clients[0].prenom,
+            clients[0].nom,
+            clients[0].ville,
+            clients[0].code_postal,
+            clients[0].num_de_tel,
+            clients[0].adresse_mail,
+            clients[0].profession);
+
+       for(int index = 1; index <= nombre_client; index++)
+        {
+            fprintf(fp,"\n%s,%s,%s,%s,%s,%s,%s",
+            clients[index].prenom,
+            clients[index].nom,
+            clients[index].ville,
+            clients[index].code_postal,
+            clients[index].num_de_tel,
+            clients[index].adresse_mail,
+            clients[index].profession);
+
+            index++;
+        }
+        fclose(fp);
+    }
+    else
+    {
+        printf("erreur d'ouverture\n");
+    }
 }

@@ -10,7 +10,6 @@
 
 typedef struct
 {
-	int ID;
 	char prenom[64];
 	char nom[64];
 	char ville[128];
@@ -33,3 +32,5 @@ int modif_client(int choix_client, client clients[]);
 int supprimer_client(client clients[],int nombre_client);
 
 int decaler_tableau(client clients[], int position, int nombre_client);
+
+void sauvegarde();

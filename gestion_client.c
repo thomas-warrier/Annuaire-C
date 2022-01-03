@@ -97,13 +97,13 @@ int modif_client(int choix_client, client clients[])
             break;
         }
     } while (choix_info != 8);
-    printf("vos changement on bien été effectués.\n");
+    printf("vos changements on bien été effectués.\n");
 }
 
 int supprimer_client(client clients[], int nombre_client)
 {
     decaler_tableau(clients, choix_client(), nombre_client);
-    printf("votre suppression a bien été enregistrer.\n");
+    printf("votre suppression a bien ete enregistrer.\n");
 
     return 0;
 }

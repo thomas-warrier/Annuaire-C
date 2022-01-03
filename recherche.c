@@ -1,25 +1,63 @@
 #include "recherche.h"
 
-int chercher_par()
+int chercher_par_filtre()
 {
     int choix_information;
-    printf("================[quelle information souhaitez vous rechercher ?]=======================\n1)prenom\n2)nom\n3)code postal\n4)profession\n");
+    printf("================[quelle information souhaitez vous filtrer ?]=======================\n1)prenom\n2)nom\n3)code postal\n4)profession\n5)Quitter\n");
     scanf("%d", &choix_information);
     return choix_information;
 }
 
-char *par_quoi_chercher(client *clients, int choix_information)
+
+char *par_quoi_chercher_filtre(client *clients, int choix_information)
 {
     switch (choix_information)
     {
     case 1:
         return clients->prenom;
+        break;
     case 2:
         return clients->nom;
+        break;
     case 3:
         return clients->code_postal;
+        break;
     case 4:
         return clients->profession;
+        break;
+    default:
+        return NULL;
+        break;
+    }
+}
+
+int chercher_par_recherche()
+{
+    int choix_information;
+    printf("================[quelle information souhaitez vous rechercher ?]=======================\n1)prenom\n2)nom\n3)numero de telephone\n4)adresse mail\n5)Quitter\n");
+    scanf("%d", &choix_information);
+    return choix_information;
+}
+
+char *par_quoi_chercher_recherche(client *clients, int choix_information)
+{
+    switch (choix_information)
+    {
+    case 1:
+        return clients->prenom;
+        break;
+    case 2:
+        return clients->nom;
+        break;
+    case 3:
+        return clients->num_de_tel;
+        break;
+    case 4:
+        return clients->adresse_mail;
+        break;
+    default:
+        return NULL;
+        break;
     }
 }
 
@@ -41,13 +79,20 @@ int strcmp_minuscule(const char *p1, const char *p2) //j'ai repris le code sourc
 void recherche_sequentielle(client clients[], char *recherche, int choix_information, int nombre_client)
 {
     int i = 0;
+    int resultat=0;
+
     while (i < nombre_client)
     {
-        if (strcmp_minuscule((par_quoi_chercher(&clients[i], choix_information)), recherche) == 0)
+        if (strcmp_minuscule((par_quoi_chercher_recherche(&clients[i], choix_information)), recherche) == 0)
         {
             printf("\n%s,%s,%s,%s,%s,%s,%s", clients[i].prenom, clients[i].nom, clients[i].ville, clients[i].code_postal, clients[i].num_de_tel, clients[i].adresse_mail, clients[i].profession);
+            resultat++;
         }
         i++;
+    }
+    if (resultat==0)
+    {
+        printf("\naucun resultat trouver pour cette recherche\n");
     }
 }
 
@@ -74,7 +119,7 @@ void filtre(client clients[], char *mot_filtre, int choix_information, int nombr
 
     while (i < nombre_client)
     {
-        char *info = par_quoi_chercher(&clients[i], choix_information);
+        char *info = par_quoi_chercher_filtre(&clients[i], choix_information);
 
         size_t len = strlen(info);
         char *info_minuscule = calloc(len + 1, sizeof(char));
@@ -87,7 +132,7 @@ void filtre(client clients[], char *mot_filtre, int choix_information, int nombr
         p = strstr(info_minuscule, mot_filtre_minuscule);
         if (p)
         {
-            printf("a la ligne %d : %s \n",i,par_quoi_chercher(&clients[i], choix_information));
+            printf("a la ligne %d : %s \n",i,par_quoi_chercher_filtre(&clients[i], choix_information));
         }
         i++;
         free(info_minuscule);
