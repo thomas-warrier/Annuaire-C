@@ -10,6 +10,7 @@
 
 typedef struct
 {
+	int ID;
 	char prenom[64];
 	char nom[64];
 	char ville[128];

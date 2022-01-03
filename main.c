@@ -83,6 +83,7 @@ int main()
         {
             char *copie_ligne = strdup(ligne); //dupliquer la chaîne ligne avec strdupa car le strsep modifie
                                                //le pointeur passé, et nous ne voulons pas perdre la valeur d’origine
+            clients[index].ID=index;
 
             token = strsep(&copie_ligne, ",");
             if (*token != '\n' && token != NULL)

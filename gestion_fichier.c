@@ -41,6 +41,7 @@ void print_tableau(client clients[], int nombre_client)
     while (y < nombre_client)
     {
         printf("\nligne %d :", y);
+        printf("%s,", clients[y].ID);
         printf("%s,", clients[y].prenom);
         printf("%s,", clients[y].nom);
         printf("%s,", clients[y].ville);
