@@ -30,7 +30,7 @@ void menu_principal(int nombre_client, client clients[])
         case 2:
             print_tableau(clients, nombre_client);
             break;
-        case 3:;
+        case 3:
             supprimer_client(clients, nombre_client);
             modifier_tableau(&clients, -1, nombre_client);
             nombre_client--;
@@ -73,7 +73,8 @@ void menu_principal(int nombre_client, client clients[])
                 clear();
             }
             break;
-        case 8:;
+        case 8:
+            info_manquante(clients,nombre_client);
             break;
         
         case 9:

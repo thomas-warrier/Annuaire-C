@@ -17,3 +17,5 @@ void recherche_sequentielle(client clients[], char* recherche,int choix_informat
 void filtre(client clients[],char* mot_filtre,int choix_information,int nombre_client);
 
 int strcmp_minuscule (const char *p1, const char *p2);
+
+void info_manquante(client clients[],int nombre_client);

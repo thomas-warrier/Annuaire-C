@@ -139,3 +139,19 @@ void filtre(client clients[], char *mot_filtre, int choix_information, int nombr
     }
     free(mot_filtre_minuscule);
 }
+
+void info_manquante(client clients[],int nombre_client)
+{
+    int compteur=0;
+    int i=0;
+    while (i < nombre_client)
+    {
+        if(clients[i].prenom[0] == '\0' || clients[i].nom[0] == '\0' || clients[i].ville[0] == '\0' || clients[i].code_postal[0] == '\0' || clients[i].num_de_tel[0] == '\0' || clients[i].adresse_mail[0] == '\0' || clients[i].profession[0] == '\0')
+        {
+            printf("\nclients %d : %s,%s,%s,%s,%s,%s,%s\n", i, clients[i].prenom, clients[i].nom, clients[i].ville, clients[i].code_postal, clients[i].num_de_tel, clients[i].adresse_mail, clients[i].profession);
+            compteur++;
+        }
+        i++;
+    }
+    printf("\n\n%d clients ont des informations manquantes\n",compteur);
+}
