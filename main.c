@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "gestion_fichier.h"
 #include "gestion_client.h"
 #include "recherche.h"
@@ -23,28 +24,52 @@ void menu_principal(int nombre_client, client clients[])
         scanf("%d", &choix);
         switch (choix)
         {
-        case 1:
+        case 1:;
+            clock_t begin = clock();
             ajouter_client(&clients, nombre_client);
             nombre_client++; //on incrémente nombre client comme on rajoute un client.
+            clock_t end = clock();
+            double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent);
             break;
-        case 2:
+        case 2:;
+            clock_t begin1 = clock();
             print_tableau(clients, nombre_client);
+            clock_t end1 = clock();
+            double time_spent1 = (double)(end1 - begin1) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent1);
             break;
-        case 3:
+        case 3:;
+            clock_t begin2 = clock();
             supprimer_client(clients, nombre_client);
             modifier_tableau(&clients, -1, nombre_client);
             nombre_client--;
+            clock_t end2 = clock();
+            double time_spent2 = (double)(end2 - begin2) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent2);
+
             break;
 
-        case 4:
+        case 4:;
+            clock_t begin3 = clock();
             modif_client(choix_client(), clients);
+            clock_t end3 = clock();
+            double time_spent3 = (double)(end3 - begin3) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent3);
             break;
 
-        case 5:
+        case 5:;
+            clock_t begin4 = clock();
             // triRapid(clients,0,nombre_client-1,trier_sur());
             tri_rapide(clients, 0, nombre_client - 1, trier_sur());
+            clock_t end4 = clock();
+            double time_spent4 = (double)(end4 - begin4) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent4);
+
+            
             break;
         case 6:;
+            clock_t begin5 = clock();
             int choix_information = chercher_par_recherche();
             if (choix_information <= 4)
             {
@@ -57,9 +82,14 @@ void menu_principal(int nombre_client, client clients[])
             {
                 clear();
             }
+            clock_t end5 = clock();
+            double time_spent5 = (double)(end5 - begin5) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent5);
+
             break;
             
         case 7:;
+            clock_t begin6 = clock();
             int choix_information_filtre = chercher_par_filtre();
             if (choix_information_filtre <= 4)
             {
@@ -72,13 +102,25 @@ void menu_principal(int nombre_client, client clients[])
             {
                 clear();
             }
+            clock_t end6 = clock();
+            double time_spent6 = (double)(end6 - begin6) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent6);
+
             break;
-        case 8:
+        case 8:;
+            clock_t begin7 = clock();
             info_manquante(clients,nombre_client);
+            clock_t end7 = clock();
+            double time_spent7 = (double)(end7 - begin7) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent7);
             break;
         
-        case 9:
+        case 9:;
+            clock_t begin8 = clock();
             sauvegarde(clients,NOM_FICHIER,nombre_client);
+            clock_t end8 = clock();
+            double time_spent8 = (double)(end8 - begin8) / CLOCKS_PER_SEC;
+            printf("\n\ntemps d'executions %f secondes\n",time_spent8);
 
         default:
             break;
