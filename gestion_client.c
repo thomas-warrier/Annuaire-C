@@ -22,28 +22,34 @@ void modifier_tableau(client *clients[], int taille_augmenter, int nombre_client
 void ajouter_client(client *clients[], int nombre_client)
 {
     modifier_tableau(clients, 1, nombre_client); //on agrandit le tableau afin d'ajouter un nouveau client.
-
-    printf("saisisser le prénom du client que vous souhaitez ajouter :  ");
-    scanf("%s", (*clients)[nombre_client].prenom);
+    fflush(stdin); //clear le tampon pour pouvoir mettre des champs vide. 
+    printf("saisisser le prenom du client que vous souhaitez ajouter :  ");
+    scanf("%[^\n]", (*clients)[nombre_client].prenom);
+    fflush(stdin);
     printf("saisisser son nom :  ");
-    scanf("%s", (*clients)[nombre_client].nom);
+    scanf("%[^\n]", (*clients)[nombre_client].nom);
+    fflush(stdin);
     printf("saisisser sa ville :  ");
-    scanf("%s", (*clients)[nombre_client].ville);
+    scanf("%[^\n]", (*clients)[nombre_client].ville);
+    fflush(stdin);
     printf("saisisser son code postal :  ");
-    scanf("%s", (*clients)[nombre_client].code_postal);
-    printf("saisisser son numéro de téléphone :  ");
-    scanf("%s", (*clients)[nombre_client].num_de_tel);
+    scanf("%[^\n]", (*clients)[nombre_client].code_postal);
+    fflush(stdin);
+    printf("saisisser son numero de telephone :  ");
+    scanf("%[^\n]", (*clients)[nombre_client].num_de_tel);
+    fflush(stdin);
     printf("saisisser son adresse mail :  ");
-    scanf("%s", (*clients)[nombre_client].adresse_mail);
+    scanf("%[^\n]", (*clients)[nombre_client].adresse_mail);
+    fflush(stdin);
     printf("saisisser sa profession :  ");
-    scanf("%s", (*clients)[nombre_client].profession);
+    scanf("%[^\n]", (*clients)[nombre_client].profession);
 
-    printf("votre client a bien été ajouté !\n");
+    printf("votre client a bien ete ajoute !\n");
 }
 int choix_client()
 {
     int choix_client;
-    printf("saisisser le numéros de votre client :  ");
+    printf("saisisser le numeros de votre client :  ");
     scanf("%d", &choix_client);
     return choix_client;
 }
@@ -97,7 +103,7 @@ int modif_client(int choix_client, client clients[])
             break;
         }
     } while (choix_info != 8);
-    printf("vos changements on bien été effectués.\n");
+    printf("vos changements on bien ete effectuer.\n");
 }
 
 int supprimer_client(client clients[], int nombre_client)

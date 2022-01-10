@@ -98,7 +98,7 @@ void sauvegarde(client clients[],char* Nom_fichier,int nombre_client)
             clients[0].adresse_mail,
             clients[0].profession);
 
-       for(int index = 1; index <= nombre_client; index++)
+       for(int index = 1; index < nombre_client; index++)
         {
             fprintf(fp,"\n%s,%s,%s,%s,%s,%s,%s",
             clients[index].prenom,
@@ -108,8 +108,6 @@ void sauvegarde(client clients[],char* Nom_fichier,int nombre_client)
             clients[index].num_de_tel,
             clients[index].adresse_mail,
             clients[index].profession);
-
-            index++;
         }
         fclose(fp);
     }

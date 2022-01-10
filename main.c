@@ -25,12 +25,9 @@ void menu_principal(int nombre_client, client clients[])
         switch (choix)
         {
         case 1:;
-            clock_t begin = clock();
             ajouter_client(&clients, nombre_client);
             nombre_client++; //on incrémente nombre client comme on rajoute un client.
-            clock_t end = clock();
-            double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-            printf("\n\ntemps d'executions %f secondes\n",time_spent);
+            
             break;
         case 2:;
             clock_t begin1 = clock();
@@ -59,32 +56,28 @@ void menu_principal(int nombre_client, client clients[])
             break;
 
         case 5:;
-            clock_t begin4 = clock();
             // triRapid(clients,0,nombre_client-1,trier_sur());
-            tri_rapide(clients, 0, nombre_client - 1, trier_sur());
+            int rep = trier_sur();
+            clock_t begin4 = clock();
+            tri_rapide(clients, 0, nombre_client - 1, rep);
             clock_t end4 = clock();
             double time_spent4 = (double)(end4 - begin4) / CLOCKS_PER_SEC;
             printf("\n\ntemps d'executions %f secondes\n",time_spent4);
-
-            
             break;
         case 6:;
-            clock_t begin5 = clock();
             int choix_information = chercher_par_recherche();
             if (choix_information <= 4)
             {
-                char *recherche;
+                char recherche[64];
                 printf("\nrentrer le nom de votre recherche : ");
                 scanf("%s", recherche);
                 recherche_sequentielle(clients, recherche, choix_information, nombre_client);
+
             }
             else
             {
                 clear();
             }
-            clock_t end5 = clock();
-            double time_spent5 = (double)(end5 - begin5) / CLOCKS_PER_SEC;
-            printf("\n\ntemps d'executions %f secondes\n",time_spent5);
 
             break;
             
