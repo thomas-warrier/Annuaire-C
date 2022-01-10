@@ -64,39 +64,47 @@ int demande_client_modif()
 
 int modif_client(int choix_client, client clients[])
 {
-    int choix_info=demande_client_modif();
+    
+    int choix_info;
     do
     {
         choix_info=demande_client_modif();
         switch (choix_info)
         {
         case 1:
-            printf("rentrer le nouveau nom de votre client.\n");
-            scanf("%s", clients[choix_client].prenom);
+            fflush(stdin);
+            printf("rentrer le nouveau prenom de votre client.\n");
+            scanf("%[^\n]", clients[choix_client].prenom);
             break;
         case 2:
+            fflush(stdin);
             printf("rentrer le nouveau nom de votre client.\n");
-            scanf("%s", clients[choix_client].nom);
+            scanf("%[^\n]", clients[choix_client].nom);
             break;
         case 3:
+            fflush(stdin);
             printf("rentrer la nouvelle ville de votre client.\n");
-            scanf("%s", clients[choix_client].ville);
+            scanf("%[^\n]", clients[choix_client].ville);
             break;
         case 4:
+            fflush(stdin);
             printf("rentrer le nouveau code postal de votre client.\n");
-            scanf("%s", clients[choix_client].code_postal);
+            scanf("%[^\n]", clients[choix_client].code_postal);
             break;
         case 5:
+            fflush(stdin);
             printf("rentrer le nouveau nouveau numéros de téléphone de votre client.\n");
-            scanf("%s", clients[choix_client].num_de_tel);
+            scanf("%[^\n]", clients[choix_client].num_de_tel);
             break;
         case 6:
+            fflush(stdin);
             printf("rentrer la nouvelle adresse email de votre client.\n");
-            scanf("%s", clients[choix_client].adresse_mail);
+            scanf("%[^\n]", clients[choix_client].adresse_mail);
             break;
         case 7:
+            fflush(stdin);
             printf("rentrer la nouvelle profession de votre client.\n");
-            scanf("%s", clients[choix_client].profession);
+            scanf("%[^\n]", clients[choix_client].profession);
             break;
         default:
             printf("le choix entrer n'est pas valide.\n");
