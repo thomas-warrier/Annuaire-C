@@ -62,7 +62,7 @@ int demande_client_modif()
     return choix_information;
 }
 
-int modif_client(int choix_client, client clients[])
+void modif_client(int choix_client, client clients[])
 {
     
     int choix_info;
@@ -122,7 +122,7 @@ int supprimer_client(client clients[], int nombre_client)
     return 0;
 }
 
-int decaler_tableau(client clients[], int position, int nombre_client)
+void decaler_tableau(client clients[], int position, int nombre_client)
 {
     int i = position;
     while (i < nombre_client - 1)

@@ -27,10 +27,10 @@ int demande_client_modif();
 
 int choix_client();
 
-int modif_client(int choix_client, client clients[]);
+void modif_client(int choix_client, client clients[]);
 
 int supprimer_client(client clients[],int nombre_client);
 
-int decaler_tableau(client clients[], int position, int nombre_client);
+void decaler_tableau(client clients[], int position, int nombre_client);
 
 void sauvegarde();

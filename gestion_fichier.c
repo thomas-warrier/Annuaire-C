@@ -47,17 +47,6 @@ void print_tableau(client clients[], int nombre_client)
         clients[y].num_de_tel,
         clients[y].adresse_mail,
         clients[y].profession);
-        // printf("%s,", clients[y].prenom);
-        // printf("%s,", clients[y].nom);
-        // printf("%s,", clients[y].ville);
-        // printf("%s,", clients[y].code_postal);
-        // printf("%s,", clients[y].num_de_tel);
-        // printf("%s,", clients[y].adresse_mail);
-        // printf("%s\n", clients[y].profession);
-        // fprintf(fp,"\n%s,%s,%s,%s,%s,%s",
-        //     clients[y].nom,
-        //     clients[y].prenom,
-        //     clients[y].profession);
 
         y++;
     }
