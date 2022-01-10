@@ -71,7 +71,11 @@ void menu_principal(int nombre_client, client clients[])
                 char recherche[64];
                 printf("\nrentrer le nom de votre recherche : ");
                 scanf("%s", recherche);
+                clock_t begin5 = clock();
                 recherche_sequentielle(clients, recherche, choix_information, nombre_client);
+                clock_t end5 = clock();
+                double time_spent5 = (double)(end5 - begin5) / CLOCKS_PER_SEC;
+                printf("\n\ntemps d'executions %f secondes\n",time_spent5);
 
             }
             else
@@ -82,22 +86,23 @@ void menu_principal(int nombre_client, client clients[])
             break;
             
         case 7:;
-            clock_t begin6 = clock();
+            
             int choix_information_filtre = chercher_par_filtre();
             if (choix_information_filtre <= 4)
             {
                 char filtre_mot[128];
                 printf("\nrentrer le nom du filtre : ");
                 scanf("%s", filtre_mot);
+                clock_t begin6 = clock();
                 filtre(clients, filtre_mot, choix_information_filtre, nombre_client);
+                clock_t end6 = clock();
+                double time_spent6 = (double)(end6 - begin6) / CLOCKS_PER_SEC;
+                printf("\n\ntemps d'executions %f secondes\n",time_spent6);
             }
             else
             {
                 clear();
             }
-            clock_t end6 = clock();
-            double time_spent6 = (double)(end6 - begin6) / CLOCKS_PER_SEC;
-            printf("\n\ntemps d'executions %f secondes\n",time_spent6);
 
             break;
         case 8:;
