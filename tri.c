@@ -2,7 +2,14 @@
 
 
 // fonction pour permuter les elements
-void permuter(client *c1, client *c2) {
+void permuter(client *c1, client *c2) 
+{
+    /* 
+    entrée: deux pointeurs sur des structures client
+    précond: aucune
+    post-cond: permute les deux structures passées en paramètre
+    sortie: aucune 
+    */
     client c3 = *c1;
     *c1=*c2;
     *c2=c3;
@@ -11,6 +18,12 @@ void permuter(client *c1, client *c2) {
 
 int trier_sur()
 {
+    /* 
+    entrée: aucune
+    précond: aucune
+    post-cond: lit un entier au clavier et retourne cet entier
+    sortie: entier 
+    */
     int choix_information;
     printf("================[par quelle information souhaitez vous trier ?]=======================\n1)prenom\n2)nom\n3)code postal\n4)profession\n");
     scanf("%d", &choix_information);
@@ -19,6 +32,12 @@ int trier_sur()
 
 char* par_quoi_trier(client *clients,int choix_information)
 {  
+    /* 
+    entrée: un pointeur sur une structure client et un entier
+    précond: l'entier doit être compris entre 1 et 4 
+    post-cond: retourne selon l'entier passé en paramètre un pointeur sur un élément de la structure client
+    sortie: pointeur sur une chaîne de caractère 
+    */
     switch (choix_information)
     {
     case 1:

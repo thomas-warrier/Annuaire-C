@@ -7,13 +7,19 @@
 #include "gestion_client.h"
 #include "recherche.h"
 
-#define NOM_FICHIER "annuaire5000.csv"
+char nom_du_fichier[64];
 
 void clear()
 {
     system("clear||cls");
 }
 
+/* 
+entrée: le nombre de clients, et un tableau de structures client
+précond: aucune
+post-cond: affiche le menu
+sortie: aucune 
+*/
 void menu_principal(int nombre_client, client clients[])
 {
     int choix;
@@ -115,7 +121,7 @@ void menu_principal(int nombre_client, client clients[])
         
         case 9:;
             clock_t begin8 = clock();
-            sauvegarde(clients,NOM_FICHIER,nombre_client);
+            sauvegarde(clients,nom_du_fichier,nombre_client);
             clock_t end8 = clock();
             double time_spent8 = (double)(end8 - begin8) / CLOCKS_PER_SEC;
             printf("\n\ntemps d'executions %f secondes\n",time_spent8);
@@ -128,14 +134,10 @@ void menu_principal(int nombre_client, client clients[])
 
 int main()
 {
+    printf("inserer le nom du fichier a charger avec l'extension utiliser : ");
+    scanf("%s",nom_du_fichier);
 
-    /**
-     * @brief on lit simplement le fichier,
-     * pour mettre les infos dans le struct,on écrira le fichier a la fin
-     * quand on sauvegardera dans le fichier
-     * 
-     */
-    FILE *fp = fopen(NOM_FICHIER, "r");
+    FILE *fp = fopen(nom_du_fichier, "r");
     int nombre_client = nombre_ligne_fichier(fp);
 
     client *clients;
@@ -191,11 +193,11 @@ int main()
             index++;
         }
         fclose(fp);
+        menu_principal(nombre_client, clients);
     }
     else
     {
         printf("erreur d'ouverture\n");
     }
-    menu_principal(nombre_client, clients);
     return 0;
 }
